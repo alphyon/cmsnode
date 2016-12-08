@@ -13,36 +13,45 @@ var exphbs = require('express-handlebars');
 var hbsHelpers = require('./lib/helpers/handlebars');
 var stylus = require('stylus');
 
+//loafin config
+global.$config = require('./lib/config');
+
+
 //stylus middleware
-app.use(
-    stylus.middleware({
-        src: __dirname + '/stylus',
-        dest:__dirname+'/public/css',
-        compile: function(str,path){
-            return stylus(str).set('filename',path).set('compress',true);
-        }
-    })
-);
+if (!$config().html.css.stylusPrecompile) {
+    app.use(
+        stylus.middleware({
+            src: __dirname + '/stylus',
+            dest: __dirname + '/public/css',
+            compile: function (str, path) {
+                return stylus(str).set('filename', path).set('compress', true);
+            }
+        })
+    );
+}
+
 
 //setup handlebars
-app.engine('.hbs',exphbs({
-    extname : '.hbs',
-    defaultLayout: 'main',
-    layoutsDir : __dirname + '/views/layouts',
-    partialsDir : __dirname + '/views/partials',
-    helpers : hbsHelpers
+app.engine($config().views.engine, exphbs({
+    extname: $config().views.extensions,
+    defaultLayout: $config().views.layout,
+    layoutsDir: __dirname + '/views/layouts',
+    partialsDir: __dirname + '/views/partials',
+    helpers: hbsHelpers
 }));
 
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', '.hbs');
+app.set('view engine', $config().views.engine);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -50,23 +59,23 @@ app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+app.use(function (req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
 // error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (err, req, res, next) {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
-if(!module.parent){
-  app.listen(3333);
+if (!module.parent) {
+    app.listen($config().serverPort);
 }
 module.exports = app;

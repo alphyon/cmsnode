@@ -1,0 +1,36 @@
+prodcution: &default
+  serverPort: 3333
+  baseUrl: http://localhost
+  views:
+    engine: .hbs
+    extension: .hbs
+    layaout: main
+  html:
+    minify: true
+    css:
+      stylusPrecompile: true
+      compress: true
+  app:
+    default: blog
+  languages:
+    default: en
+    list: [en,es]
+
+stage: &stage
+  <<: *default
+  baseUrl: http://localhost.stage
+
+latest:
+  <<: *stage
+  baseUrl: http://localhost.latest
+
+development:
+  <<: *latest
+  baseUrl: http://localhost
+  html:
+    minify: false
+    css:
+      stylusPrecompile: false
+      compress: false
+
+
