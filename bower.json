@@ -1,12 +1,10 @@
 {
-    "name": "cmsDev",
-    "version": "0.0.1",
-    "authors": [
-        "José Antonio Henríquez Chavarría"
-    ],
-    "license": "MIT",
-    "dependencies": {
-        "font-awesome" : "*",
-        "normalize-css" : "*"
-    }
+  "name": "MakignDevelopers",
+  "version": "0.0.1",
+  "author": "Carlos Santana",
+  "license": "MIT",
+  "dependencies": {
+    "font-awesome": "*",
+    "normalize-css": "*"
+  }
 }

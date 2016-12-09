@@ -1,15 +1,20 @@
+{{#compress}}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CMS Ejercicio</title>
-    <link rel="stylesheet" href="/css/style.css">
-</head>
-<body>
-    {{> site/header }}
+<html>
+    <head>
+        {{> site/metas }}
+        <title>Otro :D</title>
+        <link href="/css/style.css" rel="stylesheet" />
+    </head>
 
-    <div class="container">
-        {{{ body }}}
-    </div>
-</body>
+    <body>
+        {{> site/header }}
+
+        <div class="container">
+            {{{ body }}}
+        </div>
+
+        {{> development/livereload }}
+    </body>
 </html>
+{{/compress}}

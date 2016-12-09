@@ -1,11 +1,16 @@
-prodcution: &default
+---
+production: &default
   serverPort: 3333
-  baseUrl: http://localhost
+  baseUrl: http://www.makingdevelopers.com
+  site:
+    title: Making Developers
+    description: Web Development Tutorials
   views:
     engine: .hbs
     extension: .hbs
-    layaout: main
+    layout: main
   html:
+    livereload: false
     minify: true
     css:
       stylusPrecompile: true
@@ -14,23 +19,22 @@ prodcution: &default
     default: blog
   languages:
     default: en
-    list: [en,es]
+    list: [en, es]
 
 stage: &stage
   <<: *default
-  baseUrl: http://localhost.stage
+  baseUrl: http://stage.makingdevelopers.com
 
-latest:
+latest: &latest
   <<: *stage
-  baseUrl: http://localhost.latest
+  baseUrl: http://latest.makingdevelopers.com
 
 development:
   <<: *latest
-  baseUrl: http://localhost
+  baseUrl: http://local.makingdevelopers.com
   html:
+    livereload: true
     minify: false
     css:
       stylusPrecompile: false
       compress: false
-
-
