@@ -2,9 +2,6 @@
 production: &default
   serverPort: 3333
   baseUrl: http://www.makingdevelopers.com
-  site:
-    title: Making Developers
-    description: Web Development Tutorials
   views:
     engine: .hbs
     extension: .hbs
@@ -20,6 +17,14 @@ production: &default
   languages:
     default: en
     list: [en, es]
+  security:
+    secret: santoysena.com
+  session:
+    cookieDomain: localhost.cms
+    maxAge: 259200
+    cookiePrefix: 'mdSession_'
+    path: '/'
+    httpOnly: true
 
 stage: &stage
   <<: *default

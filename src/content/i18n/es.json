@@ -1,0 +1,14 @@
+{
+  "Site":{
+    "language" : "es",
+    "title": "Desarrollando CMS",
+    "meta" : {
+      "abstract" : "Learn diferente tech",
+      "description" : "Learn code",
+      "keywords": "HTML5,JavaScript,Node.js"
+    }
+  },
+  "Home":{
+    "welcome": "Bienvenidos al sitio"
+  }
+}

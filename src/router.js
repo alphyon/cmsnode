@@ -1,0 +1,45 @@
+import $config from './lib/config';
+import i18n from './lib/i18n';
+import utils from './lib/utils';
+
+import homeController from './app/home/home.controller';
+import dashboardController from './app/dashboard/dashboard.controller';
+
+export default (app) => {
+  const availableLanguages = $config().languages.list.join('|');
+  app.use((req, res, next) => {
+    res.__ = res.locals.__ = i18n.load(i18n.getCurrentlanguage(req.url));
+    res.locals.config.basePath = `${$config().baseUrl}${i18n.getLanguagePath(req.url)}`;
+    res.locals.basePath = res.locals.config.basePath;
+    res.locals.currentLanguage = i18n.getCurrentlanguage(req.url);
+    res.locals.isMobile = utils.Device.isMobile(req.headers['user-agent']);
+    next();
+  });
+  app.use((req, res, next) => {
+    res.locals.css = [
+      '/css/style.css'
+    ];
+
+    res.locals.topJs = [];
+    res.locals.bottomJs = [];
+    next();
+  });
+
+  app.use('/', homeController);
+  app.use(`/:languages(${availableLanguages})`,homeController);
+  app.use(`/:languages(${availableLanguages})/dashboard`,dashboardController);
+
+  app.use((req,res,next)=>{
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+  });
+
+  app.use((err,req,res,next)=>{
+    res.status(err.status || 500);
+    res.render('error',{
+      message: err.message,
+      error:{}
+    });
+  });
+};

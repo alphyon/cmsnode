@@ -1,0 +1,14 @@
+{
+  "Site":{
+    "language" : "en",
+    "title": "Develop a CMS With Node JS",
+    "meta" : {
+      "abstract" : "Learn diferente tech",
+      "description" : "Learn code",
+      "keywords": "HTML5,JavaScript,Node.js"
+    }
+  },
+  "Home":{
+    "welcome": "welcome to this site"
+  }
+}
