@@ -4,7 +4,7 @@ import utils from './utils';
 export default (req, res, next) => {
   const configData = $config().session;
   const cookiesPrefix = configData.cookiePrefix;
-  let sessionData = parseSession();
+  const sessionData = parseSession();
 
 
   const options = {
@@ -21,12 +21,12 @@ export default (req, res, next) => {
   res.session = session;
   res.clearSession = clearSession;
   res.destroySessions = destroySessions;
-  next();
+  //next();
 
   function parseSession() {
-    let rVal = {};
+    const rVal = {};
     _.forEach(req.cookies, (value, key) => {
-      const sessionPrefix = new RegExp('^' + cookiesPrefix);
+      const sessionPrefix = new RegExp(`'^'${cookiesPrefix}`);
       const isSessionCookie = key.search(sessionPrefix) !== -1;
       if (isSessionCookie) {
         value = JSON.parse(value);

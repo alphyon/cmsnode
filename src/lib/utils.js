@@ -79,20 +79,20 @@ function year() {
 
 // Device functions
 function isDesktop(ua) {
-  return !(/mobile/i.test(ua));
+  return !/mobile/i.test(ua);
 }
 
 function isMobile(ua) {
-  return (/mobile/i.test(ua));
+  return /mobile/i.test(ua);
 }
 
 function getCurrentDevice(ua) {
-  return (/mobile/i.test(ua)) ? 'mobile' : 'desktop';
+  return /mobile/i.test(ua) ? 'mobile' : 'desktop';
 }
 
 // Object functions
 function buildJson(nodes, raw) {
-  let row = {};
+  const row = {};
 
   _.forEach(nodes, node => {
     row[node.keyName] = node.keyValue;

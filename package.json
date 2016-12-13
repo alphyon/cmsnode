@@ -27,6 +27,14 @@
     "oauth": "^0.9.14",
     "stylus": "^0.54.2"
   },
+  "config": {
+    "ghooks":{
+      "pre-commit": "gulp analyze",
+      "pre-push" : "gulp-test",
+      "post-merge": "npm-install",
+      "post-rewrite": "npm install"
+    }
+  },
   "devDependencies": {
     "bower": "^1.7.7",
     "chai": "^3.5.0",
