@@ -30,7 +30,7 @@
   "config": {
     "ghooks":{
       "pre-commit": "gulp analyze",
-      "pre-push" : "gulp-test",
+      "pre-push" : "gulp test",
       "post-merge": "npm-install",
       "post-rewrite": "npm install"
     }

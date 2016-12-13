@@ -16,7 +16,7 @@ production: &default
     default: blog
   languages:
     default: en
-    list: [en, es]
+    list: [en, es, jp]
   security:
     secret: santoysena.com
   session:
